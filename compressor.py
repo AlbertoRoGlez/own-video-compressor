@@ -42,11 +42,11 @@ def compress_video(video_full_path, target_size):
 
     i = ffmpeg.input(video_full_path)
     ffmpeg.output(i, os.devnull,
-                  **{'c:v': 'libx264', 'b:v': video_bitrate, 'pass': 1, 'f': 'mp4'}
+                  **{'c:v': 'av1_nvenc', 'b:v': video_bitrate, 'pass': 1, 'f': 'mp4'}
                   ).overwrite_output().run()
-    
+
     ffmpeg.output(i, f"{output_folder}/{output_file_name}",
-                  **{'c:v': 'libx264', 'b:v': video_bitrate, 'pass': 2, 'c:a': 'aac', 'b:a': audio_bitrate}
+                  **{'c:v': 'av1_nvenc', 'b:v': video_bitrate, 'pass': 2, 'c:a': 'aac', 'b:a': audio_bitrate}
                   ).overwrite_output().run()
 
 # Compress input.mp4 to 25MB
